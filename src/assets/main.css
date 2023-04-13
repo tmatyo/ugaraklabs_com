@@ -33,3 +33,17 @@ a,
     padding: 0 2rem;
   }
 }
+
+/* ... */
+
+.slide {
+  width: 100vw;
+  height: 100vh;
+}
+
+h1 {
+  color: var(--color-h1);
+  font-size: 3em;
+  font-weight: bold;
+  font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Fira Sans,Helvetica Neue,Arial,sans-serif;  
+}
