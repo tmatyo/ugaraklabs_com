@@ -5,7 +5,6 @@ import UgarakLogo from './components/UgarakLogo.vue';
 
 <template>
 	<header>
-		<!-- <img alt="Ugarak Labs s.r.o." class="logo" src="@/assets/logo.svg" width="200" /> -->
 		<UgarakLogo color="#fff"/>
 
 		<div class="wrapper">
