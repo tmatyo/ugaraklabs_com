@@ -45,14 +45,13 @@ function clicked(t) {
 		<div id="slide4" class="slide" v-show="state.didClick">
 			<h1 v-if="state.hasWebsite" class="ct">You are <span class="hl">on the right track</span> to get <span class="hl">new
 					clients</span>.
-				<br>In case you need to <span class="hl">improve</span> and <span class="hl">modernize</span> it, or <span
-					class="hl">make it more pretty</span>,
-				<br>do not hesitate to <span class="hl">contact us</span> via the form below
-				<br>and we will agree on the details.
+				<br>In case you need to <span class="hl">improve</span> and <span class="hl">modernize</span> it, or <span class="hl">make it more pretty</span>,
+				do not hesitate to <span class="hl">contact us</span> via the form below
+				and we will agree on the details.
 			</h1>
 			<h1 v-else class="ct">You are in the right place!
-				<br><span class="hl">Contact us</span> via the form below
-				<br>and we will agree on the details.
+				<br><span class="hl">Contact us</span> via the form below 
+				<br>and we will <span class="hl">agree</span> on the details.
 			</h1>
 			<form></form>
 		</div>
