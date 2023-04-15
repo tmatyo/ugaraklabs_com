@@ -16,6 +16,11 @@ header {
 	height: 70px;
 }
 
+header #ugarak-logo {
+	height: 40px;
+	width: auto;
+}
+
 header .wrapper {
 	display: flex;
 	flex-direction: column;

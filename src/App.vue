@@ -1,11 +1,12 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import Navbar from './components/Navbar.vue'
+import UgarakLogo from './components/UgarakLogo.vue';
 </script>
 
 <template>
 	<header>
-		<img alt="Ugarak Labs s.r.o." class="logo" src="@/assets/logo.svg" width="200" />
+		<!-- <img alt="Ugarak Labs s.r.o." class="logo" src="@/assets/logo.svg" width="200" /> -->
+		<UgarakLogo color="#fff"/>
 
 		<div class="wrapper">
 			<nav>
