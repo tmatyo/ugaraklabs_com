@@ -83,7 +83,7 @@ h1 {
 	font-size: 3em;
 	line-height: 1.5em;
 	font-weight: bold;
-	font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Fira Sans,Helvetica Neue,Arial,sans-serif;  
+	font-family: var(--the-font); 
 }
 
 .button-group {
