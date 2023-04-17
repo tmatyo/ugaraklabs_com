@@ -15,3 +15,11 @@
 			transform="translate(-488.969 -280.469)" />
 	</svg>
 </template>
+<style>
+
+#ugarak-logo {
+	height: 40px;
+	width: auto;
+}
+
+</style>
