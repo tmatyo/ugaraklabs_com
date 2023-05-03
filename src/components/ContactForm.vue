@@ -14,7 +14,7 @@ function onSubmit() {
 
 <template>
     <form @submit.prevent="() => onSubmit()">
-        <label for="email">Your email</label>
+        <label for="email">Your email *</label>
         <input :value="form.email" 
         @input="e => form.email = e.target.value"
         type="email" 
@@ -22,7 +22,7 @@ function onSubmit() {
         id="email" 
         required>
 
-        <label for="message">Your message</label>
+        <label for="message">Your message *</label>
         <textarea :value="form.message" 
         @input="e => form.message = e.target.value"
         name="message" 
@@ -30,6 +30,14 @@ function onSubmit() {
         cols="30" 
         rows="10" 
         required></textarea>
+
+        <div id="checkbox-group">
+            <input type="checkbox" name="checkbox" id="checkbox" required>
+            <!-- <label for="checkbox" id="checkbox-label"><small> * Odoslaním svojich osobných údajov udeľujem firme Ugarak Labs s.r.o. súhlas s ich spracovaním na účely nevyhnutné na prvotný kontakt, spracovanie cenovej ponuky, a/alebo odpoveď s ponukou služby. Súhlas udeľujem na dobu neurčitú a som si vedomý, že ho môžem kedykoľvek odvolať.</small></label> -->
+            <label for="checkbox" id="checkbox-label"><small> * By sending my personal data, I grant the company Ugarak Labs s.r.o. consent to their processing for the purposes necessary for the initial contact, the processing of the price offer, and/or the response with the service offer. I give my consent for an indefinite period and I am aware that I can revoke it at any time.</small></label>
+        </div>
+        
+        <small id="small-disclaimer">For an answer from our side, every field in this form is required to be filled.</small>
 
         <input type="submit" value="Send" id="submit-button">
     </form>
@@ -70,6 +78,14 @@ function onSubmit() {
 	font-family: var(--the-font);
 }
 
+.contact-form form #checkbox-group {
+    margin: 10px 0;
+}
+
+.contact-form form #checkbox {
+    height: auto;
+}
+
 .contact-form form #submit-button {
     margin: 20px 0;
     font-weight: bold;
@@ -80,6 +96,10 @@ function onSubmit() {
 	background: -webkit-linear-gradient(69deg, var(--color-brand-1), var(--color-brand-2));
 	color: var(--color-text);
 	text-shadow: 1px 1px 1px var(--color-text-shadow);
+}
+
+.contact-form form small {
+    line-height: 1.2em;
 }
 
 </style>
