@@ -19,7 +19,8 @@ function onSubmit() {
         @input="e => form.email = e.target.value"
         type="email" 
         name="email" 
-        id="email" 
+        id="email"
+        placeholder="your@email.com" 
         required>
 
         <label for="message">Your message *</label>
@@ -28,7 +29,8 @@ function onSubmit() {
         name="message" 
         id="message" 
         cols="30" 
-        rows="10" 
+        rows="10"
+        placeholder="Leave a message here." 
         required></textarea>
 
         <div id="checkbox-group">
@@ -37,8 +39,6 @@ function onSubmit() {
             <label for="checkbox" id="checkbox-label"><small> * By sending my personal data, I grant the company Ugarak Labs s.r.o. consent to their processing for the purposes necessary for the initial contact, the processing of the price offer, and/or the response with the service offer. I give my consent for an indefinite period and I am aware that I can revoke it at any time.</small></label>
         </div>
         
-        <small id="small-disclaimer">For an answer from our side, every field in this form is required to be filled.</small>
-
         <input type="submit" value="Send" id="submit-button">
     </form>
 </template>    
