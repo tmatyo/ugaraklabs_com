@@ -59,7 +59,7 @@ function clicked(t) {
 					<br>and we will <span class="hl">agree</span> on the details.
 				</h1>
 			</div>
-			<div class="contact-form">
+			<div class="contact-form-container">
 				<ContactForm />
 			</div>
 		</div>
@@ -112,4 +112,9 @@ h1 {
 	color: var(--color-text);
 	text-shadow: 1px 1px 1px var(--color-text-shadow);
 }
+
+.contact-form-container {
+	width: 70%;
+}
+
 </style>
