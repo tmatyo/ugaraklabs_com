@@ -45,7 +45,7 @@ function onSubmit() {
 
 <style>
 .contact-form {
-	width: 50%;
+	width: 70%;
 }
 
 .contact-form form {
