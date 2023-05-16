@@ -1,6 +1,8 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import UgarakLogo from './components/UgarakLogo.vue';
+import UgarakLogo from './components/UgarakLogo.vue'
+import LangSwitch from './components/LangSwitch.vue'
+import Tr from './i18n/translation'
 </script>
 
 <template>
@@ -9,9 +11,10 @@ import UgarakLogo from './components/UgarakLogo.vue';
 
 		<div class="wrapper">
 			<nav>
-				<RouterLink :class="navbar-link" to="/">Home</RouterLink>
-				<RouterLink :class="navbar-link" to="/about">About</RouterLink>
+				<RouterLink :class="navbar-link" :to="Tr.routeGenerator({ name: 'home' })" >{{ $t("nav.home") }}</RouterLink>
+				<RouterLink :class="navbar-link" :to="Tr.routeGenerator({ name: 'about' })" >{{ $t("nav.about") }}</RouterLink>
 			</nav>
+			<LangSwitch />
 		</div>
 	</header>
 
