@@ -40,3 +40,15 @@ export default {
         </option>
     </select>
 </template>
+
+<style>
+#lang {
+    max-width: 75px;
+    margin-left: 30px;
+    background: var(--color-background);
+    color: var(--color-text);
+    padding: 5px;
+    font-size: .8em;
+    border: none;
+}
+</style>

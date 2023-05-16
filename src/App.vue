@@ -14,8 +14,8 @@ import Tr from './i18n/translation'
 				<RouterLink :class="navbar-link" :to="Tr.routeGenerator({ name: 'home' })" >{{ $t("nav.home") }}</RouterLink>
 				<RouterLink :class="navbar-link" :to="Tr.routeGenerator({ name: 'about' })" >{{ $t("nav.about") }}</RouterLink>
 			</nav>
-			<LangSwitch />
 		</div>
+		<LangSwitch />
 	</header>
 
 	<RouterView />
