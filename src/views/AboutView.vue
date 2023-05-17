@@ -5,17 +5,18 @@ import ContactForm from '../components/ContactForm.vue'
 
 <template>
 	<div id="about-page">
-		<h1>About us</h1>
+		<h1>{{ $t("about.title") }}</h1>
 		<div id="about">
 			<div id="about-left" class="half">
-				<h2>Ugarak Labs s.r.o.</h2>
-				<p><strong>IČO:</strong> 55137369</p>
-				<p><strong>DIČ:</strong> 2121883522</p>
-				<p><strong>Zápis v obchodnom registri:</strong><br>Okresný súd Nitra, oddiel: Sro, vložka č. 59246/N</p>
+				<h2>{{ $t("about.company.name") }}</h2>
+				<p><strong>{{ $t("about.company.id.name") }}:</strong> {{ $t("about.company.id.value") }}</p>
+				<p><strong>{{ $t("about.company.tax.name") }}:</strong> {{ $t("about.company.tax.value") }}</p>
+				<p><strong>{{ $t("about.company.orsr.name") }}:</strong><br>{{ $t("about.company.orsr.value") }}</p>
 
-				<h3>Contact:</h3>
-				<p><strong>Email:</strong> info@ugaraklabs.com</p>
-				<p>...or feel free to use the contact form.</p>
+				<h3>{{ $t("about.contact") }}:</h3>
+				<p><strong>{{ $t("about.company.email.name") }}:</strong> 
+					{{ $t('about.company.email.value', { acc: $t('about.company.email.acc'), dom: $t('about.company.email.dom') }) }}</p>
+				<p>{{ $t("about.msg") }}</p>
 
 			</div>
 			<div id="about-right" class="half">

@@ -11,9 +11,43 @@
 
     },
     "about": {
-
+        "title": "O nás",
+        "company": {
+            "name": "Ugarak Labs s.r.o.",
+            "id": {
+                "name": "IČO",
+                "value": "55137369"
+            },
+            "tax": {
+                "name": "DIČ",
+                "value": "2121883522"
+            },
+            "orsr": {
+                "name": "Zápis v obchodnom registri",
+                "value": "Okresný súd Nitra, oddiel: Sro, vložka č. 59246/N"
+            },
+            "email": {
+                "name": "Email",
+                "value": "{acc}{'@'}{dom}",
+                "acc": "info",
+                "dom": "ugaraklabs.com"
+            }
+        },
+        "contact": "Kontakt",
+        "msg": "... alebo môžete použiť aj kontaktný formulár."
     },
     "form": {
-        
+        "email": {
+            "label": "Váš email *",
+            "placeholder": "{acc}{'@'}{dom}",
+            "acc": "váš",
+            "dom": "email.sk"
+        },
+        "message": {
+            "label": "Vaša správa *",
+            "placeholder": "Vašu správu napíšte prosím sem ..."
+        },
+        "disclaimer": " * Odoslaním svojich osobných údajov udeľujem firme Ugarak Labs s.r.o. súhlas s ich spracovaním na účely nevyhnutné na prvotný kontakt, spracovanie cenovej ponuky, a/alebo odpoveď s ponukou služby. Súhlas udeľujem na dobu neurčitú a som si vedomý, že ho môžem kedykoľvek odvolať.",
+        "send": "Odoslať"
     }
 }

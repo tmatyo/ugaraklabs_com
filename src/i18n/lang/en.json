@@ -11,9 +11,43 @@
 
     },
     "about": {
-
+        "title": "About us",
+        "company": {
+            "name": "Ugarak Labs s.r.o.",
+            "id": {
+                "name": "ID",
+                "value": "55137369"
+            },
+            "tax": {
+                "name": "TAX ID",
+                "value": "2121883522"
+            },
+            "orsr": {
+                "name": "Entry in the commercial register",
+                "value": "Okresný súd Nitra, section: Sro, insert no. 59246/N"
+            },
+            "email": {
+                "name": "Email",
+                "value": "{acc}{'@'}{dom}",
+                "acc": "info",
+                "dom": "ugaraklabs.com"
+            }
+        },
+        "contact": "Contact",
+        "msg": "...or feel free to use the contact form."
     },
     "form": {
-        
+        "email": {
+            "label": "Your email *",
+            "placeholder": "{acc}{'@'}{dom}",
+            "acc": "your",
+            "dom": "email.com"
+        },
+        "message": {
+            "label": "Your message *",
+            "placeholder": "Your message goes here ..."
+        },
+        "disclaimer": " * By sending my personal data, I grant the company Ugarak Labs s.r.o. consent to their processing for the purposes necessary for the initial contact, the processing of the price offer, and/or the response with the service offer. I give my consent for an indefinite period and I am aware that I can revoke it at any time.",
+        "send": "Send"
     }
 }
