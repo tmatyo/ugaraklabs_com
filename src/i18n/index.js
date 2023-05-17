@@ -6,5 +6,7 @@ export default createI18n({
     fallbackLocale: import.meta.env.VITE_FALLBACK_LANG,
     legacy: false,
     globalInjection: true,
+    //warnHtmlMessage: false,
+    //warnHtmlInMessage: 'off',
     messages: { en }
 })

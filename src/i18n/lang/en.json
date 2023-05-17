@@ -8,7 +8,33 @@
         "sk": "SK"
     },
     "home": {
-
+        "slide1": {
+            "part0": "Time is",
+            "part1": "money.",
+            "part2": "Even more so if you have",
+            "part3": "a",
+            "part4": "business",
+            "part5": "to run."
+        },
+        "slide2": {
+            "part0": "For the majority of",
+            "part1": "people",
+            "part2": "a company without a",
+            "part3": "website",
+            "part4": "is not even a company."
+        },
+        "slide3": {
+            "part0": "Those",
+            "part1": "people",
+            "part2": "could be your",
+            "part3": "clients",
+            "part4": "Do you already have a",
+            "part5": "website?"
+        },
+        "yes": "Yes",
+        "no": "No",
+        "answer1": "",
+        "answer2": ""
     },
     "about": {
         "title": "About us",

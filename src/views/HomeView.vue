@@ -1,5 +1,5 @@
 <script setup>
-import { reactive } from 'vue';
+import { reactive } from 'vue'
 import ContactForm from '../components/ContactForm.vue'
 
 const state = reactive({
@@ -21,28 +21,29 @@ function clicked(t) {
 	<main>
 		<div id="slide1" class="slide">
 			<span class="shape-animated"></span>
-			<h1>Time is <span class="hl">money</span>.
-				<br>Even more so if you have
-				<br>a <span class="hl">business</span> to run.
+			<h1>{{ $t("home.slide1.part0") }} <span class='hl'>{{ $t("home.slide1.part1") }}</span>
+				<br>{{ $t("home.slide1.part2") }}
+				<br>{{ $t("home.slide1.part3") }} 
+				<span class='hl'>{{ $t("home.slide1.part4") }}</span> {{ $t("home.slide1.part5") }}
 			</h1>
 		</div>
 
 		<div id="slide2" class="slide">
 			<span class="shape-animated"></span>
-			<h1 class="ar">For the majority of <span class="hl">people</span>,
-				<br>a <span class="tp">company</span> without a <span class="hl">website</span>
-				<br>is not even a <span class="tp">company</span>.
+			<h1 class="ar">{{ $t("home.slide2.part0") }} <span class="hl">{{ $t("home.slide2.part1") }}</span>,
+				<br>{{ $t("home.slide2.part2") }} <span class="hl">{{ $t("home.slide2.part3") }}</span>
+				<br>{{ $t("home.slide2.part4") }}
 			</h1>
 		</div>
 
 		<div id="slide3" class="slide">
 			<span class="shape-animated"></span>
-			<h1 class="ct">Those <span class="hl">people</span> could be your <span class="hl">clients</span>.
-				<br>Do you already have a <span class="hl">website</span>?
+			<h1 class="ct">{{ $t("home.slide3.part0") }} <span class="hl">{{ $t("home.slide3.part1") }}</span> {{ $t("home.slide3.part2") }} <span class="hl">{{ $t("home.slide3.part3") }}</span>.
+				<br>{{ $t("home.slide3.part4") }} <span class="hl">{{ $t("home.slide3.part5") }}</span>
 			</h1>
 			<div class="button-group">
-				<button @click="clicked(true)">Yes</button>
-				<button @click="clicked(false)">No</button>
+				<button @click="clicked(true)">{{ $t("home.yes") }}</button>
+				<button @click="clicked(false)">{{ $t("home.no") }}</button>
 			</div>
 		</div>
 
