@@ -61,7 +61,7 @@ function clicked(t) {
 				</h1>
 			</div>
 			<div class="contact-form-container">
-				<ContactForm />
+				<ContactForm :hasWebsite="state.hasWebsite"/>
 			</div>
 		</div>
 	</main>
