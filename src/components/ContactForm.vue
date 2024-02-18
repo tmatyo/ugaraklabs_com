@@ -1,5 +1,5 @@
 <template>
-  <div class="contact-form">
+  <div id="contact-form" v-if="emailsEnabled">
     <form @submit.prevent="() => onSubmit()">
       <label for="email">{{ $t("form.email.label") }}</label>
       <input
@@ -47,10 +47,24 @@
       <input type="submit" :value="$t('form.send')" id="submit-button" />
     </form>
   </div>
+  <div id="send-email" v-else>
+    <p>{{ $t("noForm.msg") }}</p>
+    <a
+      class="hl"
+      :href="`mailto:${$t('about.company.email.value', { acc: $t('about.company.email.acc'), dom: $t('about.company.email.dom') })}`"
+    >
+      {{
+        $t("about.company.email.value", {
+          acc: $t("about.company.email.acc"),
+          dom: $t("about.company.email.dom"),
+        })
+      }}</a
+    >
+  </div>
 </template>
 
 <script setup>
-import { ref, reactive } from "vue";
+import { ref, reactive, onMounted, computed } from "vue";
 import axios from "axios";
 
 const props = defineProps({
@@ -66,6 +80,9 @@ const messageTextArea = ref(null);
 const message = ref("");
 const gdpr = ref(false);
 const cycle = reactive({});
+const emailsEnabled = computed(() => {
+  return true; //FOR TESTING, OTHERWISE cycle?.value?.cycle_remaining > 1
+});
 
 function onSubmit() {
   console.log("email", email.value);
@@ -83,11 +100,11 @@ function onSubmit() {
     console.log("onSubmit() Aborting form submit");
     return;
   } else {
-    checkForLimit();
+    checkForCycles();
   }
 }
 
-const checkForLimit = () => {
+const checkForCycles = (initial = false) => {
   const { VITE_SMTP2GO_API_KEY, VITE_SMTP2GO_CYCLE } = import.meta.env;
 
   axios({
@@ -102,14 +119,14 @@ const checkForLimit = () => {
   })
     .then((results) => {
       console.log(results);
-      cycle.value = results.data.data;
+      cycle.value = results?.data?.data;
 
-      if (cycle.value.cycle_remaining > 1) {
-        sendEmail();
-      } else {
-        console.log(
-          `Cannot send email, because monthly quota exceeded. ${cycle.value.cycle_remaining}/${cycle.value.cycle_max} left. Try again after ${cycle.value.cycle_end}. `,
-        );
+      if (!initial) {
+        emailsEnabled
+          ? sendEmail()
+          : console.log(
+              `Cannot send email, because monthly quota exceeded. ${cycle.value.cycle_remaining}/${cycle.value.cycle_max} left. Try again after ${cycle.value.cycle_end}. `,
+            );
       }
     })
     .catch((err) => console.log(err));
@@ -153,68 +170,77 @@ const sendEmail = () => {
     .then((results) => console.log(results))
     .catch((err) => console.log(err));
 };
+
+onMounted(() => {
+  //checkForCycles();
+});
 </script>
 
 <style>
-.contact-form {
+#contact-form {
   width: 100%;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    label {
+      margin: 20px 0 10px 0;
+    }
+
+    input {
+      height: 3em;
+      line-height: 2em;
+      font-size: 1em;
+      padding: 0 15px;
+      border-radius: 5px;
+      outline: none;
+      border: 0;
+    }
+
+    textarea {
+      padding: 10px 15px;
+      line-height: 1.5em;
+      font-size: 1em;
+      border-radius: 5px;
+      outline: none;
+      border: 0;
+      font-family: var(--the-font);
+    }
+
+    #checkbox-group {
+      margin: 10px 0;
+    }
+
+    #checkbox {
+      height: auto;
+    }
+
+    #submit-button {
+      margin: 20px 0;
+      font-weight: bold;
+      cursor: pointer;
+
+      &:hover {
+        background: -webkit-linear-gradient(
+          69deg,
+          var(--color-brand-1),
+          var(--color-brand-2)
+        );
+        color: var(--color-text);
+        text-shadow: 1px 1px 1px var(--color-text-shadow);
+      }
+    }
+
+    small {
+      line-height: 1.2em;
+    }
+  }
 }
 
-.contact-form form {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-.contact-form form label {
-  margin: 20px 0 10px 0;
-}
-
-.contact-form form input {
-  height: 3em;
+#send-email {
+  text-align: center;
   line-height: 2em;
-  font-size: 1em;
-  padding: 0 15px;
-  border-radius: 5px;
-  outline: none;
-  border: 0;
-}
-
-.contact-form form textarea {
-  padding: 10px 15px;
-  line-height: 1.5em;
-  font-size: 1em;
-  border-radius: 5px;
-  outline: none;
-  border: 0;
-  font-family: var(--the-font);
-}
-
-.contact-form form #checkbox-group {
-  margin: 10px 0;
-}
-
-.contact-form form #checkbox {
-  height: auto;
-}
-
-.contact-form form #submit-button {
-  margin: 20px 0;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.contact-form form #submit-button:hover {
-  background: -webkit-linear-gradient(
-    69deg,
-    var(--color-brand-1),
-    var(--color-brand-2)
-  );
-  color: var(--color-text);
-  text-shadow: 1px 1px 1px var(--color-text-shadow);
-}
-
-.contact-form form small {
-  line-height: 1.2em;
 }
 </style>
