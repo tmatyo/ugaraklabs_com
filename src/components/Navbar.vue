@@ -2,9 +2,9 @@
 defineProps({
   msg: {
     type: String,
-    required: true
-  }
-})
+    required: true,
+  },
+});
 </script>
 
 <template>
@@ -18,6 +18,4 @@ defineProps({
   </div>
 </template>
 
-<style>
-
-</style>
+<style></style>

@@ -1,38 +1,40 @@
-@import './base.css';
-@import './animations.css';
+@import "./base.css";
+@import "./animations.css";
 
 #app {
-	max-width: 1280px;
-	margin: 0 auto;
-	font-weight: normal;
+  max-width: 1280px;
+  margin: 0 auto;
+  font-weight: normal;
 }
 
 /* ... */
 
-
-
 /* formatters */
 
 .hl {
-	background: -webkit-linear-gradient(69deg, var(--color-brand-1), var(--color-brand-2));
-	-webkit-text-fill-color: transparent;
-	background-clip: text;
-	-webkit-background-clip: text;
-	font-weight: bold;
+  background: -webkit-linear-gradient(
+    69deg,
+    var(--color-brand-1),
+    var(--color-brand-2)
+  );
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  font-weight: bold;
 }
 
 .tp {
-	-webkit-text-fill-color: var(--color-background);
-	-webkit-text-stroke-width: 1px;
-	-webkit-text-stroke-color: var(--color-text);
+  -webkit-text-fill-color: var(--color-background);
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: var(--color-text);
 }
 
 .ar {
-	text-align: right;
+  text-align: right;
 }
 
 .ct {
-	text-align: center;
-	/* max-width: 80%; */
-	margin-bottom: 50px; 
+  text-align: center;
+  /* max-width: 80%; */
+  margin-bottom: 50px;
 }
