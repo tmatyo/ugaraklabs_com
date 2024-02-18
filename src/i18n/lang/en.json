@@ -64,14 +64,14 @@
     },
     "form": {
         "email": {
-            "label": "Your email *",
+            "label": "Your email goes here",
             "placeholder": "{acc}{'@'}{dom}",
             "acc": "your",
             "dom": "email.com"
         },
         "message": {
             "label": "Your message *",
-            "placeholder": "Your message goes here ..."
+            "placeholder": "Tell us, how can we help you!"
         },
         "disclaimer": " * By sending my personal data, I grant the company Ugarak Labs s.r.o. consent to their processing for the purposes necessary for the initial contact, the processing of the price offer, and/or the response with the service offer. I give my consent for an indefinite period and I am aware that I can revoke it at any time.",
         "send": "Send"

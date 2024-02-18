@@ -14,8 +14,9 @@ import ContactForm from '../components/ContactForm.vue'
 				<p><strong>{{ $t("about.company.orsr.name") }}:</strong><br>{{ $t("about.company.orsr.value") }}</p>
 
 				<h3>{{ $t("about.contact") }}:</h3>
-				<p><strong>{{ $t("about.company.email.name") }}:</strong> 
-					{{ $t('about.company.email.value', { acc: $t('about.company.email.acc'), dom: $t('about.company.email.dom') }) }}</p>
+				<p><strong>{{ $t("about.company.email.name") }}: </strong> 
+					<a class="hl" :href="`mailto:${$t('about.company.email.value', { acc: $t('about.company.email.acc'), dom: $t('about.company.email.dom') })}`" > {{ $t('about.company.email.value', { acc: $t('about.company.email.acc'), dom: $t('about.company.email.dom') }) }}</a>
+				</p>
 				<p>{{ $t("about.msg") }}</p>
 
 			</div>

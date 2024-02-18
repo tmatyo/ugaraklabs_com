@@ -22,6 +22,7 @@ function onSubmit() {
             name="email" 
             id="email"
             :placeholder="$t('form.email.placeholder', { acc: $t('form.email.acc'), dom: $t('form.email.dom') })" 
+            :aria-label="$t('form.email.label')"
             required>
 
             <label for="message">{{ $t("form.message.label") }}</label>
@@ -32,6 +33,7 @@ function onSubmit() {
             cols="30" 
             rows="10"
             :placeholder="$t('form.message.placeholder')" 
+            :aria-label="$t('form.message.label')"
             required></textarea>
 
             <div id="checkbox-group">
