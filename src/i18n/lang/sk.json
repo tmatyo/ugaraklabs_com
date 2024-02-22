@@ -76,11 +76,11 @@
     "disclaimer": " * Odoslaním svojich osobných údajov udeľujem firme Ugarak Labs s.r.o. súhlas s ich spracovaním na účely nevyhnutné na prvotný kontakt, spracovanie cenovej ponuky, a/alebo odpoveď s ponukou služby. Súhlas udeľujem na dobu neurčitú a som si vedomý, že ho môžem kedykoľvek odvolať.",
     "send": "Odoslať",
     "errors": {
-        "noEmail": "Prosím zadajte svoju emailovú adresu, aby sme Vás mohli kontaktovať.",
-        "emailTooLong": "Vaša emailová adresa je príliš dlhá.",
-        "notAnEmailAddress": "Prosím zadajte emailovú adresu v správnom formáte.",
-        "emptyMessage": "Správa je prázdna. Prosím napíšte nám v čom Vám vieme byť nápomocní.",
-        "messageTooLong": "Správa je príliš dlhá. Napíšte prosím iba hlavné body a detaily môžeme prebrať cez telefón, alebo osobne."
+      "noEmail": "Prosím zadajte svoju emailovú adresu, aby sme Vás mohli kontaktovať.",
+      "emailTooLong": "Vaša emailová adresa je príliš dlhá.",
+      "notAnEmailAddress": "Prosím zadajte emailovú adresu v správnom formáte.",
+      "emptyMessage": "Správa je prázdna. Prosím napíšte nám v čom Vám vieme byť nápomocní.",
+      "messageTooLong": "Správa je príliš dlhá. Napíšte prosím iba hlavné body a detaily môžeme prebrať cez telefón, alebo osobne."
     }
   },
   "noForm": {

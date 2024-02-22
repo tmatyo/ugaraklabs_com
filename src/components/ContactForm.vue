@@ -19,7 +19,9 @@
         @input="validate"
       />
       <div class="error-messages email-error" v-if="emailErrors?.length">
-        <p v-for="err in emailErrors"><small>{{ $t(`form.errors.${err}`) }}</small></p>
+        <p v-for="err in emailErrors">
+          <small>{{ $t(`form.errors.${err}`) }}</small>
+        </p>
       </div>
 
       <label for="message">{{ $t("form.message.label") }}</label>
@@ -32,20 +34,20 @@
         rows="10"
         :placeholder="$t('form.message.placeholder')"
         :aria-label="$t('form.message.label')"
-        :class="{ 'highlight-error': messageErrors?.length}"
+        :class="{ 'highlight-error': messageErrors?.length }"
         @input="validate"
       ></textarea>
       <div class="error-messages message-error" v-if="messageErrors?.length">
-        <p v-for="err in messageErrors"><small>{{ $t(`form.errors.${err}`) }}</small></p>
+        <p v-for="err in messageErrors">
+          <small>{{ $t(`form.errors.${err}`) }}</small>
+        </p>
       </div>
 
-      <div id="checkbox-group" :class="{ 'highlight-error': !gdpr && !validatorFirstRun}">
-        <input
-          type="checkbox"
-          name="checkbox"
-          id="checkbox"
-          v-model="gdpr"
-        />
+      <div
+        id="checkbox-group"
+        :class="{ 'highlight-error': !gdpr && !validatorFirstRun }"
+      >
+        <input type="checkbox" name="checkbox" id="checkbox" v-model="gdpr" />
         <label for="checkbox" id="checkbox-label"
           ><small>{{ $t("form.disclaimer") }}</small></label
         >
@@ -84,10 +86,10 @@ const props = defineProps({
 
 const emailInput = ref(null);
 const email = ref("");
-const emailErrors = ref([])
+const emailErrors = ref([]);
 const messageTextArea = ref(null);
 const message = ref("");
-const messageErrors = ref([])
+const messageErrors = ref([]);
 const gdpr = ref(false);
 const cycle = reactive({});
 const validatorFirstRun = ref(true);
@@ -97,11 +99,10 @@ const emailsEnabled = computed(() => {
 
 const validate = () => {
   useValidator(email, message, emailErrors, messageErrors, validatorFirstRun);
-}
+};
 
 const onSubmit = () => {
-
-  if(validatorFirstRun.value) {
+  if (validatorFirstRun.value) {
     validatorFirstRun.value = false;
   }
 
@@ -114,17 +115,13 @@ const onSubmit = () => {
   console.log("gdpr", gdpr.value);
   console.log("has-website", props.hasWebsite);
 
-  if (
-    emailErrors.value.length ||
-    messageErrors.value.length ||
-    !gdpr.value
-  ) {
+  if (emailErrors.value.length || messageErrors.value.length || !gdpr.value) {
     console.log("onSubmit() Aborting form submit");
     return;
   } else {
     checkForCycles();
   }
-}
+};
 
 const checkForCycles = (initial = false) => {
   const { VITE_SMTP2GO_API_KEY, VITE_SMTP2GO_CYCLE } = import.meta.env;
@@ -236,13 +233,14 @@ onMounted(() => {
         color: red;
       }
     }
-    input[type="text"].highlight-error, textarea.highlight-error {
+    input[type="text"].highlight-error,
+    textarea.highlight-error {
       border: 1px solid red;
-      background: #ffcccc
+      background: #ffcccc;
     }
 
     div.highlight-error {
-      border: 1px dotted red;;
+      border: 1px dotted red;
     }
 
     #checkbox-group {
