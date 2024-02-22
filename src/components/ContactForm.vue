@@ -1,11 +1,11 @@
 <template>
   <div id="contact-form" v-if="emailsEnabled">
-    <form @submit.prevent="() => onSubmit()">
+    <form @submit.prevent="onSubmit">
       <label for="email">{{ $t("form.email.label") }}</label>
       <input
         v-model="email"
         ref="emailInput"
-        type="email"
+        type="text"
         name="email"
         id="email"
         :placeholder="
@@ -15,8 +15,12 @@
           })
         "
         :aria-label="$t('form.email.label')"
-        required
+        :class="{ 'highlight-error': emailErrors?.length }"
+        @input="validate"
       />
+      <div class="error-messages email-error" v-if="emailErrors?.length">
+        <p v-for="err in emailErrors"><small>{{ $t(`form.errors.${err}`) }}</small></p>
+      </div>
 
       <label for="message">{{ $t("form.message.label") }}</label>
       <textarea
@@ -28,16 +32,19 @@
         rows="10"
         :placeholder="$t('form.message.placeholder')"
         :aria-label="$t('form.message.label')"
-        required
+        :class="{ 'highlight-error': messageErrors?.length}"
+        @input="validate"
       ></textarea>
+      <div class="error-messages message-error" v-if="messageErrors?.length">
+        <p v-for="err in messageErrors"><small>{{ $t(`form.errors.${err}`) }}</small></p>
+      </div>
 
-      <div id="checkbox-group">
+      <div id="checkbox-group" :class="{ 'highlight-error': !gdpr && !validatorFirstRun}">
         <input
           type="checkbox"
           name="checkbox"
           id="checkbox"
           v-model="gdpr"
-          required
         />
         <label for="checkbox" id="checkbox-label"
           ><small>{{ $t("form.disclaimer") }}</small></label
@@ -66,6 +73,7 @@
 <script setup>
 import { ref, reactive, onMounted, computed } from "vue";
 import axios from "axios";
+import useValidator from "../composables/useValidator";
 
 const props = defineProps({
   hasWebsite: {
@@ -76,15 +84,29 @@ const props = defineProps({
 
 const emailInput = ref(null);
 const email = ref("");
+const emailErrors = ref([])
 const messageTextArea = ref(null);
 const message = ref("");
+const messageErrors = ref([])
 const gdpr = ref(false);
 const cycle = reactive({});
+const validatorFirstRun = ref(true);
 const emailsEnabled = computed(() => {
   return true; //FOR TESTING, OTHERWISE cycle?.value?.cycle_remaining > 1
 });
 
-function onSubmit() {
+const validate = () => {
+  useValidator(email, message, emailErrors, messageErrors, validatorFirstRun);
+}
+
+const onSubmit = () => {
+
+  if(validatorFirstRun.value) {
+    validatorFirstRun.value = false;
+  }
+
+  validate();
+
   console.log("email", email.value);
   console.log("email-valid", emailInput.value.validity.valid);
   console.log("message", message.value);
@@ -93,8 +115,8 @@ function onSubmit() {
   console.log("has-website", props.hasWebsite);
 
   if (
-    !emailInput.value.validity.valid ||
-    !messageTextArea.value.validity.valid ||
+    emailErrors.value.length ||
+    messageErrors.value.length ||
     !gdpr.value
   ) {
     console.log("onSubmit() Aborting form submit");
@@ -172,11 +194,11 @@ const sendEmail = () => {
 };
 
 onMounted(() => {
-  //checkForCycles();
+  //checkForCycles(true);
 });
 </script>
 
-<style>
+<style scoped>
 #contact-form {
   width: 100%;
 
@@ -207,6 +229,20 @@ onMounted(() => {
       outline: none;
       border: 0;
       font-family: var(--the-font);
+    }
+
+    .error-messages {
+      small {
+        color: red;
+      }
+    }
+    input[type="text"].highlight-error, textarea.highlight-error {
+      border: 1px solid red;
+      background: #ffcccc
+    }
+
+    div.highlight-error {
+      border: 1px dotted red;;
     }
 
     #checkbox-group {
