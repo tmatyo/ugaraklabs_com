@@ -1,0 +1,22 @@
+{
+  "name": "ugarak-labs-backend",
+  "version": "1.0.0",
+  "description": "Just the backend endpoints for my company website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ugarak",
+    "labs"
+  ],
+  "author": "tmatyo",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "^3.2.5"
+  }
+}
