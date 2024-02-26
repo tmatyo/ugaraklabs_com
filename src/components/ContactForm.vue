@@ -53,7 +53,24 @@
         >
       </div>
 
-      <input type="submit" :value="$t('form.send')" id="submit-button" />
+      <button
+        type="submit"
+        id="submit-button"
+        class="g-recaptcha"
+        data-sitekey="reCAPTCHA_site_key"
+        data-callback="onSubmit"
+        data-action="submit"
+        :class="{ 'colorful-button': sending || response }"
+      >
+        <span v-if="!sending && !response">{{ $t("form.send") }}</span>
+        <LoadingAnimation v-else-if="sending && !response" />
+        <span v-else-if="!sending && response && sendingSuccess">{{
+          $t("form.response.success")
+        }}</span>
+        <span v-else-if="!sending && response && !sendingSuccess">{{
+          `${$t("form.response.error")} ${$t("about.company.email.value", { acc: $t("about.company.email.acc"), dom: $t("about.company.email.dom") })}`
+        }}</span>
+      </button>
     </form>
   </div>
   <div id="send-email" v-else>
@@ -76,6 +93,7 @@
 import { ref, reactive, onMounted, computed } from "vue";
 import axios from "axios";
 import useValidator from "../composables/useValidator";
+import LoadingAnimation from "./LoadingAnimation.vue";
 
 const props = defineProps({
   hasWebsite: {
@@ -84,15 +102,21 @@ const props = defineProps({
   },
 });
 
-const emailInput = ref(null);
 const email = ref("");
-const emailErrors = ref([]);
-const messageTextArea = ref(null);
 const message = ref("");
-const messageErrors = ref([]);
 const gdpr = ref(false);
-const cycle = reactive({});
+
+const emailInput = ref(null);
+const messageTextArea = ref(null);
+const emailErrors = ref([]);
+const messageErrors = ref([]);
+
 const validatorFirstRun = ref(true);
+const cycle = reactive({});
+const sending = ref(false);
+const response = ref(false);
+const sendingSuccess = ref(false);
+
 const emailsEnabled = computed(() => {
   return true; //FOR TESTING, OTHERWISE cycle?.value?.cycle_remaining > 1
 });
@@ -119,6 +143,8 @@ const onSubmit = () => {
     console.log("onSubmit() Aborting form submit");
     return;
   } else {
+    console.log("Initiating sending.");
+    sending.value = true;
     checkForCycles();
   }
 };
@@ -136,9 +162,9 @@ const checkForCycles = (initial = false) => {
       api_key: VITE_SMTP2GO_API_KEY,
     }),
   })
-    .then((results) => {
-      console.log(results);
-      cycle.value = results?.data?.data;
+    .then((res) => {
+      console.log(res);
+      cycle.value = res?.data?.data;
 
       if (!initial) {
         emailsEnabled
@@ -148,7 +174,11 @@ const checkForCycles = (initial = false) => {
             );
       }
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      sending.value = false;
+      response.value = true;
+      console.log(err);
+    });
 };
 
 const sendEmail = () => {
@@ -186,11 +216,23 @@ const sendEmail = () => {
       html_body: emailBodyHtml,
     }),
   })
-    .then((results) => console.log(results))
-    .catch((err) => console.log(err));
+    .then((res) => {
+      sending.value = false;
+      response.value = true;
+      sendingSuccess.value = true;
+      console.log(res);
+    })
+    .catch((err) => {
+      sending.value = false;
+      response.value = true;
+      console.log(err);
+    });
 };
 
 onMounted(() => {
+  // let recaptcha = document.createElement("script");
+  // recaptcha.setAttribute("src", "https://www.google.com/recaptcha/api.js");
+  // document.head.appendChild(recaptcha);
   //checkForCycles(true);
 });
 </script>
@@ -208,7 +250,8 @@ onMounted(() => {
       margin: 20px 0 10px 0;
     }
 
-    input {
+    input,
+    #submit-button {
       height: 3em;
       line-height: 2em;
       font-size: 1em;
@@ -255,8 +298,10 @@ onMounted(() => {
       margin: 20px 0;
       font-weight: bold;
       cursor: pointer;
+      /*width: 120px;*/
 
-      &:hover {
+      &:hover,
+      &.colorful-button {
         background: -webkit-linear-gradient(
           69deg,
           var(--color-brand-1),

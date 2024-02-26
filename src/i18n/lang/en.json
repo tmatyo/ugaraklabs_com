@@ -81,6 +81,10 @@
       "notAnEmailAddress": "Pleaes enter a valid email address.",
       "emptyMessage": "The message is empty. Please tell us how can we help you.",
       "messageTooLong": "The message seems to be too long. Please tell us the main points and we will discuss the details in a call or in person."
+    },
+    "response": {
+      "success": "Email sent successfully!",
+      "error": "An error occured. Please contact us on "
     }
   },
   "noForm": {
