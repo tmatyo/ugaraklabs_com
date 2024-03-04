@@ -1,41 +1,41 @@
 .shape-animated {
-  position: absolute;
-  margin-left: auto;
-  margin-right: auto;
-  left: 0;
-  right: 0;
-  background: var(--color-brand-1);
-  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-  animation: morheus 10s infinite;
-  transition: all 1s infinite;
-  height: 25em;
-  width: 50%;
-  opacity: 0.15;
+	position: absolute;
+	margin-left: auto;
+	margin-right: auto;
+	left: 0;
+	right: 0;
+	background: var(--color-brand-1);
+	border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+	animation: morheus 10s infinite;
+	transition: all 1s infinite;
+	height: 25em;
+	width: 50%;
+	opacity: 0.15;
 }
 
 @keyframes morheus {
-  0% {
-    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-    background: var(--color-brand-1);
-  }
+	0% {
+		border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+		background: var(--color-brand-1);
+	}
 
-  25% {
-    border-radius: 47% 53% 41% 59% / 51% 49% 51% 49%;
-    background: var(--color-brand-2);
-  }
+	25% {
+		border-radius: 47% 53% 41% 59% / 51% 49% 51% 49%;
+		background: var(--color-brand-2);
+	}
 
-  50% {
-    border-radius: 14% 86% 25% 75% / 71% 60% 40% 29%;
-    background: #fff;
-  }
+	50% {
+		border-radius: 14% 86% 25% 75% / 71% 60% 40% 29%;
+		background: #fff;
+	}
 
-  75% {
-    border-radius: 65% 35% 70% 30% / 30% 87% 13% 70%;
-    background: var(--color-brand-2);
-  }
+	75% {
+		border-radius: 65% 35% 70% 30% / 30% 87% 13% 70%;
+		background: var(--color-brand-2);
+	}
 
-  100% {
-    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-    background: var(--color-brand-1);
-  }
+	100% {
+		border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+		background: var(--color-brand-1);
+	}
 }

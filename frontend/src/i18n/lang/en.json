@@ -1,93 +1,93 @@
 {
-  "nav": {
-    "home": "Home",
-    "about": "About"
-  },
-  "language": {
-    "en": "EN",
-    "sk": "SK"
-  },
-  "home": {
-    "slide1": {
-      "part0": "Time is",
-      "part1": "money.",
-      "part2": "Even more so if you have",
-      "part3": "a",
-      "part4": "business",
-      "part5": "to run."
-    },
-    "slide2": {
-      "part0": "For the majority of",
-      "part1": "people",
-      "part2": "a company without a",
-      "part3": "website",
-      "part4": "is not even a company."
-    },
-    "slide3": {
-      "part0": "Those",
-      "part1": "people",
-      "part2": "could be your",
-      "part3": "clients",
-      "part4": "Do you already have a",
-      "part5": "website?"
-    },
-    "yes": "Yes",
-    "no": "No",
-    "answer1": "",
-    "answer2": ""
-  },
-  "about": {
-    "title": "About us",
-    "company": {
-      "name": "Ugarak Labs s.r.o.",
-      "id": {
-        "name": "ID",
-        "value": "55137369"
-      },
-      "tax": {
-        "name": "TAX ID",
-        "value": "2121883522"
-      },
-      "orsr": {
-        "name": "Entry in the commercial register",
-        "value": "Okresný súd Nitra, section: Sro, insert no. 59246/N"
-      },
-      "email": {
-        "name": "Email",
-        "value": "{acc}{'@'}{dom}",
-        "acc": "info",
-        "dom": "ugaraklabs.com"
-      }
-    },
-    "contact": "Contact",
-    "msg": "...or feel free to use the contact form."
-  },
-  "form": {
-    "email": {
-      "label": "Your email goes here",
-      "placeholder": "{acc}{'@'}{dom}",
-      "acc": "your",
-      "dom": "email.com"
-    },
-    "message": {
-      "label": "Your message *",
-      "placeholder": "Tell us, how can we help you!"
-    },
-    "disclaimer": " * By sending my personal data, I grant the company Ugarak Labs s.r.o. consent to their processing for the purposes necessary for the initial contact, the processing of the price offer, and/or the response with the service offer. I give my consent for an indefinite period and I am aware that I can revoke it at any time.",
-    "send": "Send",
-    "errors": {
-      "noEmail": "Please enter your email address, so we can contact you back.",
-      "emailTooLong": "Your email address seems to be too long.",
-      "notAnEmailAddress": "Pleaes enter a valid email address.",
-      "emptyMessage": "The message is empty. Please tell us how can we help you.",
-      "messageTooLong": "The message seems to be too long. Please tell us the main points and we will discuss the details in a call or in person."
-    },
-    "response": {
-      "success": "Email sent successfully!",
-      "error": "An error occured. Please contact us on "
-    }
-  },
-  "noForm": {
-    "msg": "Send us a message and we will be back at you asap."
-  }
+	"nav": {
+		"home": "Home",
+		"about": "About"
+	},
+	"language": {
+		"en": "EN",
+		"sk": "SK"
+	},
+	"home": {
+		"slide1": {
+			"part0": "Time is",
+			"part1": "money.",
+			"part2": "Even more so if you have",
+			"part3": "a",
+			"part4": "business",
+			"part5": "to run."
+		},
+		"slide2": {
+			"part0": "For the majority of",
+			"part1": "people",
+			"part2": "a company without a",
+			"part3": "website",
+			"part4": "is not even a company."
+		},
+		"slide3": {
+			"part0": "Those",
+			"part1": "people",
+			"part2": "could be your",
+			"part3": "clients",
+			"part4": "Do you already have a",
+			"part5": "website?"
+		},
+		"yes": "Yes",
+		"no": "No",
+		"answer1": "",
+		"answer2": ""
+	},
+	"about": {
+		"title": "About us",
+		"company": {
+			"name": "Ugarak Labs s.r.o.",
+			"id": {
+				"name": "ID",
+				"value": "55137369"
+			},
+			"tax": {
+				"name": "TAX ID",
+				"value": "2121883522"
+			},
+			"orsr": {
+				"name": "Entry in the commercial register",
+				"value": "Okresný súd Nitra, section: Sro, insert no. 59246/N"
+			},
+			"email": {
+				"name": "Email",
+				"value": "{acc}{'@'}{dom}",
+				"acc": "info",
+				"dom": "ugaraklabs.com"
+			}
+		},
+		"contact": "Contact",
+		"msg": "...or feel free to use the contact form."
+	},
+	"form": {
+		"email": {
+			"label": "Your email goes here",
+			"placeholder": "{acc}{'@'}{dom}",
+			"acc": "your",
+			"dom": "email.com"
+		},
+		"message": {
+			"label": "Your message *",
+			"placeholder": "Tell us, how can we help you!"
+		},
+		"disclaimer": " * By sending my personal data, I grant the company Ugarak Labs s.r.o. consent to their processing for the purposes necessary for the initial contact, the processing of the price offer, and/or the response with the service offer. I give my consent for an indefinite period and I am aware that I can revoke it at any time.",
+		"send": "Send",
+		"errors": {
+			"noEmail": "Please enter your email address, so we can contact you back.",
+			"emailTooLong": "Your email address seems to be too long.",
+			"notAnEmailAddress": "Pleaes enter a valid email address.",
+			"emptyMessage": "The message is empty. Please tell us how can we help you.",
+			"messageTooLong": "The message seems to be too long. Please tell us the main points and we will discuss the details in a call or in person."
+		},
+		"response": {
+			"success": "Email sent successfully!",
+			"error": "An error occured. Please contact us on "
+		}
+	},
+	"noForm": {
+		"msg": "Send us a message and we will be back at you asap."
+	}
 }

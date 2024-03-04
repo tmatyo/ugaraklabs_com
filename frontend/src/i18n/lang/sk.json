@@ -1,93 +1,93 @@
 {
-  "nav": {
-    "home": "Domov",
-    "about": "O nás"
-  },
-  "language": {
-    "en": "EN",
-    "sk": "SK"
-  },
-  "home": {
-    "slide1": {
-      "part0": "Čas sú",
-      "part1": "peniaze.",
-      "part2": "O to viac, ak máte",
-      "part3": "svoj vlastný",
-      "part4": "biznis.",
-      "part5": ""
-    },
-    "slide2": {
-      "part0": "Pre väčšinu",
-      "part1": "ľudí",
-      "part2": "firma bez",
-      "part3": "webstránky",
-      "part4": "ako keby ani neexistovala."
-    },
-    "slide3": {
-      "part0": "Títo",
-      "part1": "ľudia",
-      "part2": "môžu byť Vaši",
-      "part3": "zákazníci",
-      "part4": "Máte už svoju firemnú",
-      "part5": "webstránku?"
-    },
-    "yes": "Áno",
-    "no": "Nie",
-    "answer1": "",
-    "answer2": ""
-  },
-  "about": {
-    "title": "O nás",
-    "company": {
-      "name": "Ugarak Labs s.r.o.",
-      "id": {
-        "name": "IČO",
-        "value": "55137369"
-      },
-      "tax": {
-        "name": "DIČ",
-        "value": "2121883522"
-      },
-      "orsr": {
-        "name": "Zápis v obchodnom registri",
-        "value": "Okresný súd Nitra, oddiel: Sro, vložka č. 59246/N"
-      },
-      "email": {
-        "name": "Email",
-        "value": "{acc}{'@'}{dom}",
-        "acc": "info",
-        "dom": "ugaraklabs.com"
-      }
-    },
-    "contact": "Kontakt",
-    "msg": "... alebo môžete použiť aj kontaktný formulár."
-  },
-  "form": {
-    "email": {
-      "label": "Zadajte Vašu emailovú adresu.",
-      "placeholder": "{acc}{'@'}{dom}",
-      "acc": "váš",
-      "dom": "email.sk"
-    },
-    "message": {
-      "label": "Napíšte nám, v čím Vám vieme pomôcť!",
-      "placeholder": "Vašu správu napíšte prosím sem ..."
-    },
-    "disclaimer": " * Odoslaním svojich osobných údajov udeľujem firme Ugarak Labs s.r.o. súhlas s ich spracovaním na účely nevyhnutné na prvotný kontakt, spracovanie cenovej ponuky, a/alebo odpoveď s ponukou služby. Súhlas udeľujem na dobu neurčitú a som si vedomý, že ho môžem kedykoľvek odvolať.",
-    "send": "Odoslať",
-    "errors": {
-      "noEmail": "Prosím zadajte svoju emailovú adresu, aby sme Vás mohli kontaktovať.",
-      "emailTooLong": "Vaša emailová adresa je príliš dlhá.",
-      "notAnEmailAddress": "Prosím zadajte emailovú adresu v správnom formáte.",
-      "emptyMessage": "Správa je prázdna. Prosím napíšte nám v čom Vám vieme byť nápomocní.",
-      "messageTooLong": "Správa je príliš dlhá. Napíšte prosím iba hlavné body a detaily môžeme prebrať cez telefón, alebo osobne."
-    },
-    "response": {
-      "success": "Email úspešne odoslaný!",
-      "error": "Nastala chyba. Prosím kontaktujte nás na  "
-    }
-  },
-  "noForm": {
-    "msg": "Pošlite nám správu a my sa Vám budeme venovať hneď ako to bude možné."
-  }
+	"nav": {
+		"home": "Domov",
+		"about": "O nás"
+	},
+	"language": {
+		"en": "EN",
+		"sk": "SK"
+	},
+	"home": {
+		"slide1": {
+			"part0": "Čas sú",
+			"part1": "peniaze.",
+			"part2": "O to viac, ak máte",
+			"part3": "svoj vlastný",
+			"part4": "biznis.",
+			"part5": ""
+		},
+		"slide2": {
+			"part0": "Pre väčšinu",
+			"part1": "ľudí",
+			"part2": "firma bez",
+			"part3": "webstránky",
+			"part4": "ako keby ani neexistovala."
+		},
+		"slide3": {
+			"part0": "Títo",
+			"part1": "ľudia",
+			"part2": "môžu byť Vaši",
+			"part3": "zákazníci",
+			"part4": "Máte už svoju firemnú",
+			"part5": "webstránku?"
+		},
+		"yes": "Áno",
+		"no": "Nie",
+		"answer1": "",
+		"answer2": ""
+	},
+	"about": {
+		"title": "O nás",
+		"company": {
+			"name": "Ugarak Labs s.r.o.",
+			"id": {
+				"name": "IČO",
+				"value": "55137369"
+			},
+			"tax": {
+				"name": "DIČ",
+				"value": "2121883522"
+			},
+			"orsr": {
+				"name": "Zápis v obchodnom registri",
+				"value": "Okresný súd Nitra, oddiel: Sro, vložka č. 59246/N"
+			},
+			"email": {
+				"name": "Email",
+				"value": "{acc}{'@'}{dom}",
+				"acc": "info",
+				"dom": "ugaraklabs.com"
+			}
+		},
+		"contact": "Kontakt",
+		"msg": "... alebo môžete použiť aj kontaktný formulár."
+	},
+	"form": {
+		"email": {
+			"label": "Zadajte Vašu emailovú adresu.",
+			"placeholder": "{acc}{'@'}{dom}",
+			"acc": "váš",
+			"dom": "email.sk"
+		},
+		"message": {
+			"label": "Napíšte nám, v čím Vám vieme pomôcť!",
+			"placeholder": "Vašu správu napíšte prosím sem ..."
+		},
+		"disclaimer": " * Odoslaním svojich osobných údajov udeľujem firme Ugarak Labs s.r.o. súhlas s ich spracovaním na účely nevyhnutné na prvotný kontakt, spracovanie cenovej ponuky, a/alebo odpoveď s ponukou služby. Súhlas udeľujem na dobu neurčitú a som si vedomý, že ho môžem kedykoľvek odvolať.",
+		"send": "Odoslať",
+		"errors": {
+			"noEmail": "Prosím zadajte svoju emailovú adresu, aby sme Vás mohli kontaktovať.",
+			"emailTooLong": "Vaša emailová adresa je príliš dlhá.",
+			"notAnEmailAddress": "Prosím zadajte emailovú adresu v správnom formáte.",
+			"emptyMessage": "Správa je prázdna. Prosím napíšte nám v čom Vám vieme byť nápomocní.",
+			"messageTooLong": "Správa je príliš dlhá. Napíšte prosím iba hlavné body a detaily môžeme prebrať cez telefón, alebo osobne."
+		},
+		"response": {
+			"success": "Email úspešne odoslaný!",
+			"error": "Nastala chyba. Prosím kontaktujte nás na  "
+		}
+	},
+	"noForm": {
+		"msg": "Pošlite nám správu a my sa Vám budeme venovať hneď ako to bude možné."
+	}
 }
