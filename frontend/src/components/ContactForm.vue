@@ -62,15 +62,20 @@
         data-action="submit"
         :class="{ 'colorful-button': sending || response }"
       >
-        <span v-if="!sending && !response">{{ $t("form.send") }}</span>
-        <LoadingAnimation v-else-if="sending && !response" />
-        <span v-else-if="!sending && response && sendingSuccess">{{
+        <span v-if="!sending">{{ $t("form.send") }}</span>
+        <LoadingAnimation v-else-if="sending" />
+      </button>
+      <span v-if="response && sendingSuccess">{{
           $t("form.response.success")
         }}</span>
-        <span v-else-if="!sending && response && !sendingSuccess">{{
-          `${$t("form.response.error")} ${$t("about.company.email.value", { acc: $t("about.company.email.acc"), dom: $t("about.company.email.dom") })}`
-        }}</span>
-      </button>
+        <span v-else-if="response && !sendingSuccess">
+          {{$t("form.response.error")}} <a class="hl" :href="`mailto:${$t('about.company.email.value', { acc: $t('about.company.email.acc'), dom: $t('about.company.email.dom') })}`" >
+          {{$t("about.company.email.value", {
+          acc: $t("about.company.email.acc"),
+          dom: $t("about.company.email.dom"),
+        })}}
+      </a>
+        </span>
     </form>
   </div>
   <div id="send-email" v-else>
@@ -118,7 +123,7 @@ const response = ref(false);
 const sendingSuccess = ref(false);
 
 const emailsEnabled = computed(() => {
-  return true; //FOR TESTING, OTHERWISE cycle?.value?.cycle_remaining > 1
+  return cycle?.value?.cycle_remaining > 1
 });
 
 const validate = () => {
@@ -132,47 +137,24 @@ const onSubmit = () => {
 
   validate();
 
-  console.log("email", email.value);
-  console.log("email-valid", emailInput.value.validity.valid);
-  console.log("message", message.value);
-  console.log("message-valid", messageTextArea.value.validity.valid);
-  console.log("gdpr", gdpr.value);
-  console.log("has-website", props.hasWebsite);
-
   if (emailErrors.value.length || messageErrors.value.length || !gdpr.value) {
     console.log("onSubmit() Aborting form submit");
     return;
   } else {
     console.log("Initiating sending.");
     sending.value = true;
-    checkForCycles();
+    sendEmail();
   }
 };
 
 const checkForCycles = (initial = false) => {
-  const { VITE_SMTP2GO_API_KEY, VITE_SMTP2GO_CYCLE } = import.meta.env;
 
-  axios({
-    url: VITE_SMTP2GO_CYCLE,
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    data: JSON.stringify({
-      api_key: VITE_SMTP2GO_API_KEY,
-    }),
-  })
+  axios.post(`http://localhost:3000${import.meta.env.VITE_API_ENDPOINT_CYCLES}`)
     .then((res) => {
       console.log(res);
       cycle.value = res?.data?.data;
 
-      if (!initial) {
-        emailsEnabled
-          ? sendEmail()
-          : console.log(
-              `Cannot send email, because monthly quota exceeded. ${cycle.value.cycle_remaining}/${cycle.value.cycle_max} left. Try again after ${cycle.value.cycle_end}. `,
-            );
-      }
+      console.log(`Cannot send email, because monthly quota exceeded. ${cycle.value.cycle_remaining}/${cycle.value.cycle_max} left. Try again after ${cycle.value.cycle_end}. `);
     })
     .catch((err) => {
       sending.value = false;
@@ -194,28 +176,11 @@ const sendEmail = () => {
         <tr><td><strong>cycle_max:</strong></td><td>${cycle.value.cycle_max}</td></tr>
         </table></html>`;
 
-  const {
-    VITE_SMTP2GO_API_KEY,
-    VITE_SMTP2GO_SEND,
-    VITE_SENDER_ADDRESS,
-    VITE_RECEIVER_ADDRESS,
-    VITE_EMAIL_SUBJECT,
-  } = import.meta.env;
-
-  axios({
-    url: VITE_SMTP2GO_SEND,
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    data: JSON.stringify({
-      api_key: VITE_SMTP2GO_API_KEY,
-      sender: VITE_SENDER_ADDRESS,
-      to: [VITE_RECEIVER_ADDRESS],
-      subject: `${VITE_EMAIL_SUBJECT} from ${email.value.split("@")[0]}`,
-      html_body: emailBodyHtml,
-    }),
-  })
+  axios.post(`http://localhost:3000${import.meta.env.VITE_API_ENDPOINT_SEND}`,{
+      clientName: email.value.split("@")[0],
+      messageBody: emailBodyHtml,
+    }
+  )
     .then((res) => {
       sending.value = false;
       response.value = true;
@@ -233,7 +198,7 @@ onMounted(() => {
   // let recaptcha = document.createElement("script");
   // recaptcha.setAttribute("src", "https://www.google.com/recaptcha/api.js");
   // document.head.appendChild(recaptcha);
-  //checkForCycles(true);
+  checkForCycles(true);
 });
 </script>
 

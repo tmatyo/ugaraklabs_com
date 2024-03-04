@@ -56,15 +56,15 @@ const send = async (req) => {
 
 const checkForCycles = async (req, res) => {
   const cycles = await getCycles();
-  cycles.status === 200 ? res.json(cycles) : res.status(500).json(cycles);
+  cycles.status === 200 ? res.status(200).json(cycles.data) : res.status(500).json(cycles.data);
 };
 
 const sendEmail = async (req, res) => {
   const cycles = await getCycles();
 
   if (cycles.data.data.cycle_remaining > 1) {
-    const sending = await send(req.query);
-    sending.status === 200 ? res.json(sending) : res.status(500).json(sending);
+    const sending = await send(req.body);
+    sending.status === 200 ? res.status(200).json(sending.data) : res.status(500).json(sending.data);
   } else {
     res
       .status(503)
