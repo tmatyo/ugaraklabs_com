@@ -148,16 +148,17 @@ const onSubmit = () => {
 	}
 };
 
-const checkForCycles = (initial = false) => {
+const checkForCycles = () => {
 	axios
 		.post(`http://localhost:3000${import.meta.env.VITE_API_ENDPOINT_CYCLES}`)
 		.then((res) => {
 			console.log(res);
 			cycle.value = res?.data?.data;
-
-			console.log(
-				`Cannot send email, because monthly quota exceeded. ${cycle.value.cycle_remaining}/${cycle.value.cycle_max} left. Try again after ${cycle.value.cycle_end}. `,
-			);
+			if (emailsEnabled) {
+				console.log(
+					`Cannot send email, because monthly quota exceeded. ${cycle.value.cycle_remaining}/${cycle.value.cycle_max} left. Try again after ${cycle.value.cycle_end}. `,
+				);
+			}
 		})
 		.catch((err) => {
 			sending.value = false;
@@ -167,22 +168,11 @@ const checkForCycles = (initial = false) => {
 };
 
 const sendEmail = () => {
-	const d = new Date();
-	const emailBodyHtml = `<html><table><tr><td><strong>email:</strong></td><td>${email.value}</td></tr>
-        <tr><td><strong>web:</strong></td><td>${props.hasWebsite ? "✅" : "⛔"}</td></tr>
-        <tr><td><strong>time:</strong></td><td>${d.toUTCString()}</td></tr>
-        </table><p>${message.value}</p>
-        <table><tr><td><strong>cycle_end:</strong></td><td>${cycle.value.cycle_end}</td></tr>
-        <tr><td><strong>cycle_start:</strong></td><td>${cycle.value.cycle_start}</td></tr>
-        <tr><td><strong>cycle_used:</strong></td><td>${cycle.value.cycle_used}</td></tr>
-        <tr><td><strong>cycle_remaining:</strong></td><td>${cycle.value.cycle_remaining}</td></tr>
-        <tr><td><strong>cycle_max:</strong></td><td>${cycle.value.cycle_max}</td></tr>
-        </table></html>`;
-
 	axios
 		.post(`http://localhost:3000${import.meta.env.VITE_API_ENDPOINT_SEND}`, {
-			clientName: email.value.split("@")[0],
-			messageBody: emailBodyHtml,
+			clientEmail: email.value,
+			messageBody: message.value,
+			hasWebsite: gdpr.value,
 		})
 		.then((res) => {
 			sending.value = false;
@@ -191,9 +181,14 @@ const sendEmail = () => {
 			console.log(res);
 		})
 		.catch((err) => {
+			console.log(err);
+			if (err.response?.data?.emailErrors?.length || err.response?.data?.messageErrors?.length) {
+				emailErrors.value = emailErrors;
+				messageErrors.value = messageErrors;
+				validate();
+			}
 			sending.value = false;
 			response.value = true;
-			console.log(err);
 		});
 };
 
@@ -201,7 +196,7 @@ onMounted(() => {
 	// let recaptcha = document.createElement("script");
 	// recaptcha.setAttribute("src", "https://www.google.com/recaptcha/api.js");
 	// document.head.appendChild(recaptcha);
-	checkForCycles(true);
+	checkForCycles();
 });
 </script>
 
