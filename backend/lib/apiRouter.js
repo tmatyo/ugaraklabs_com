@@ -3,6 +3,7 @@ const app = express();
 const api = express.Router();
 const { checkForCycles, sendEmail } = require('./smtp2go');
 const cors = require('cors');
+const reCaptcha = require('./reCaptcha');
 
 api.use(express.json());
 api.use(
@@ -13,7 +14,12 @@ api.use(
 );
 
 api.use((req, res, next) => {
-	next();
+	if (reCaptcha(req.body.token)) {
+		next();
+	} else {
+		res.status(403).json({ statu: 403, message: 'Forbidden: Bot alert!' });
+		return;
+	}
 });
 
 api.post('/checkForCycles', checkForCycles);

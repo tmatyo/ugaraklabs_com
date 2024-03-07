@@ -100,6 +100,9 @@ import { ref, reactive, onMounted, computed } from "vue";
 import axios from "axios";
 import useValidator from "../composables/useValidator";
 import LoadingAnimation from "./LoadingAnimation.vue";
+import { useReCaptcha } from "vue-recaptcha-v3";
+
+const { executeRecaptcha, recaptchaLoaded } = useReCaptcha();
 
 const props = defineProps({
 	hasWebsite: {
@@ -127,6 +130,12 @@ const emailsEnabled = computed(() => {
 	return cycle?.value?.cycle_remaining > 1;
 });
 
+const recaptcha = async (action = "") => {
+	await recaptchaLoaded();
+	const token = await executeRecaptcha(action);
+	return token;
+};
+
 const validate = () => {
 	useValidator(email, message, emailErrors, messageErrors, validatorFirstRun);
 };
@@ -138,23 +147,21 @@ const onSubmit = () => {
 
 	validate();
 
-	if (emailErrors.value.length || messageErrors.value.length || !gdpr.value) {
-		console.log("onSubmit() Aborting form submit");
-		return;
-	} else {
+	if (!emailErrors.value.length && !messageErrors.value.length && gdpr.value) {
 		console.log("Initiating sending.");
 		sending.value = true;
 		sendEmail();
 	}
 };
 
-const checkForCycles = () => {
+const checkForCycles = async () => {
+	const token = await recaptcha("cycles");
+
 	axios
-		.post(`http://localhost:3000${import.meta.env.VITE_API_ENDPOINT_CYCLES}`)
+		.post(`http://localhost:3000${import.meta.env.VITE_API_ENDPOINT_CYCLES}`, { token })
 		.then((res) => {
-			console.log(res);
 			cycle.value = res?.data?.data;
-			if (emailsEnabled) {
+			if (!emailsEnabled) {
 				console.log(
 					`Cannot send email, because monthly quota exceeded. ${cycle.value.cycle_remaining}/${cycle.value.cycle_max} left. Try again after ${cycle.value.cycle_end}. `,
 				);
@@ -167,18 +174,19 @@ const checkForCycles = () => {
 		});
 };
 
-const sendEmail = () => {
+const sendEmail = async () => {
+	const token = await recaptcha("sendEmail");
 	axios
 		.post(`http://localhost:3000${import.meta.env.VITE_API_ENDPOINT_SEND}`, {
 			clientEmail: email.value,
 			messageBody: message.value,
-			hasWebsite: gdpr.value,
+			hasWebsite: props.hasWebsite,
+			token,
 		})
 		.then((res) => {
 			sending.value = false;
 			response.value = true;
 			sendingSuccess.value = true;
-			console.log(res);
 		})
 		.catch((err) => {
 			console.log(err);
@@ -193,9 +201,6 @@ const sendEmail = () => {
 };
 
 onMounted(() => {
-	// let recaptcha = document.createElement("script");
-	// recaptcha.setAttribute("src", "https://www.google.com/recaptcha/api.js");
-	// document.head.appendChild(recaptcha);
 	checkForCycles();
 });
 </script>
