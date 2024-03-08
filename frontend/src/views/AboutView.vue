@@ -1,5 +1,10 @@
 <script setup>
+import { ref } from "vue";
 import ContactForm from "../components/ContactForm.vue";
+const emailsEnabled = ref(false);
+const readyOrNot = () => {
+	emailsEnabled.value = true;
+};
 </script>
 
 <template>
@@ -35,10 +40,10 @@ import ContactForm from "../components/ContactForm.vue";
 						}}</a
 					>
 				</p>
-				<p>{{ $t("about.msg") }}</p>
+				<p v-if="emailsEnabled">{{ $t("about.msg") }}</p>
 			</div>
 			<div id="about-right" class="half">
-				<ContactForm />
+				<ContactForm @ready="readyOrNot" />
 			</div>
 		</div>
 	</div>

@@ -62,8 +62,8 @@
 				<span v-if="!sending">{{ $t("form.send") }}</span>
 				<LoadingAnimation v-else-if="sending" />
 			</button>
-			<span v-if="response && sendingSuccess">{{ $t("form.response.success") }}</span>
-			<span v-else-if="response && !sendingSuccess">
+			<span class="response-message" v-if="response && sendingSuccess">{{ $t("form.response.success") }}</span>
+			<span class="response-message" v-else-if="response && !sendingSuccess">
 				{{ $t("form.response.error") }}
 				<a
 					class="hl"
@@ -79,7 +79,7 @@
 			</span>
 		</form>
 	</div>
-	<div id="send-email" v-else>
+	<div id="send-email" v-else-if="emailsEnabled === false">
 		<p>{{ $t("noForm.msg") }}</p>
 		<a
 			class="hl"
@@ -92,6 +92,9 @@
 				})
 			}}</a
 		>
+	</div>
+	<div id="cf-loading" v-else>
+		<LoadingAnimation />
 	</div>
 </template>
 
@@ -107,9 +110,11 @@ const { executeRecaptcha, recaptchaLoaded } = useReCaptcha();
 const props = defineProps({
 	hasWebsite: {
 		type: Boolean,
-		required: true,
+		default: false,
 	},
 });
+
+const emit = defineEmits(["ready"]);
 
 const email = ref("");
 const message = ref("");
@@ -127,7 +132,7 @@ const response = ref(false);
 const sendingSuccess = ref(false);
 
 const emailsEnabled = computed(() => {
-	return cycle?.value?.cycle_remaining > 1;
+	return cycle.value ? cycle.value.cycle_remaining > 1 : null;
 });
 
 const recaptcha = async (action = "") => {
@@ -141,6 +146,10 @@ const validate = () => {
 };
 
 const onSubmit = () => {
+	if (sending.value) {
+		return;
+	}
+
 	if (validatorFirstRun.value) {
 		validatorFirstRun.value = false;
 	}
@@ -161,15 +170,13 @@ const checkForCycles = async () => {
 		.post(`http://localhost:3000${import.meta.env.VITE_API_ENDPOINT_CYCLES}`, { token })
 		.then((res) => {
 			cycle.value = res?.data?.data;
-			if (!emailsEnabled) {
-				console.log(
-					`Cannot send email, because monthly quota exceeded. ${cycle.value.cycle_remaining}/${cycle.value.cycle_max} left. Try again after ${cycle.value.cycle_end}. `,
-				);
-			}
+			emailsEnabled
+				? emit("ready")
+				: console.log(
+						`Cannot send email, because monthly quota exceeded. ${cycle.value.cycle_remaining}/${cycle.value.cycle_max} left. Try again after ${cycle.value.cycle_end}. `,
+					);
 		})
 		.catch((err) => {
-			sending.value = false;
-			response.value = true;
 			console.log(err);
 		});
 };
@@ -276,6 +283,10 @@ onMounted(() => {
 			}
 		}
 
+		.response-message {
+			text-align: center;
+		}
+
 		small {
 			line-height: 1.2em;
 		}
@@ -285,5 +296,15 @@ onMounted(() => {
 #send-email {
 	text-align: center;
 	line-height: 2em;
+	flex-direction: column;
+}
+
+#cf-loading,
+#send-email {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 </style>
