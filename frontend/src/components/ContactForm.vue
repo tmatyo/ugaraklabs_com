@@ -24,7 +24,12 @@
 				</p>
 			</div>
 
-			<label for="message">{{ $t("form.message.label") }}</label>
+			<label for="message"
+				>{{ $t("form.message.label") }}
+				<span :class="{ 'red-text': message.length > 2000 }"
+					>{{ message.length }} {{ $t("form.message.maxLength") }}
+				</span></label
+			>
 			<textarea
 				v-model="message"
 				ref="messageTextArea"
@@ -244,6 +249,10 @@ onMounted(() => {
 			outline: none;
 			border: 0;
 			font-family: var(--the-font);
+		}
+
+		.red-text {
+			color: red;
 		}
 
 		.error-messages {

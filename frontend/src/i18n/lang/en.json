@@ -71,7 +71,8 @@
 		},
 		"message": {
 			"label": "Your message *",
-			"placeholder": "Tell us, how can we help you!"
+			"placeholder": "Tell us, how can we help you!",
+			"maxLength": "characters."
 		},
 		"disclaimer": " * By sending my personal data, I grant the company Ugarak Labs s.r.o. consent to their processing for the purposes necessary for the initial contact, the processing of the price offer, and/or the response with the service offer. I give my consent for an indefinite period and I am aware that I can revoke it at any time.",
 		"send": "Send",

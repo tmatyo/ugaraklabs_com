@@ -71,7 +71,8 @@
 		},
 		"message": {
 			"label": "Napíšte nám, v čím Vám vieme pomôcť!",
-			"placeholder": "Vašu správu napíšte prosím sem ..."
+			"placeholder": "Vašu správu napíšte prosím sem ...",
+			"maxLength": "znakov."
 		},
 		"disclaimer": " * Odoslaním svojich osobných údajov udeľujem firme Ugarak Labs s.r.o. súhlas s ich spracovaním na účely nevyhnutné na prvotný kontakt, spracovanie cenovej ponuky, a/alebo odpoveď s ponukou služby. Súhlas udeľujem na dobu neurčitú a som si vedomý, že ho môžem kedykoľvek odvolať.",
 		"send": "Odoslať",
