@@ -107,10 +107,12 @@
 import { ref, reactive, onMounted, computed } from "vue";
 import axios from "axios";
 import useValidator from "../composables/useValidator";
+import useCookie from "../composables/useCookie";
 import LoadingAnimation from "./LoadingAnimation.vue";
 import { useReCaptcha } from "vue-recaptcha-v3";
 
 const { executeRecaptcha, recaptchaLoaded } = useReCaptcha();
+const { setCookie, getCookie } = useCookie();
 
 const props = defineProps({
 	hasWebsite: {
@@ -175,11 +177,16 @@ const checkForCycles = async () => {
 		.post(`http://localhost:3000${import.meta.env.VITE_API_ENDPOINT_CYCLES}`, { token })
 		.then((res) => {
 			cycle.value = res?.data?.data;
-			emailsEnabled
-				? emit("ready")
-				: console.log(
-						`Cannot send email, because monthly quota exceeded. ${cycle.value.cycle_remaining}/${cycle.value.cycle_max} left. Try again after ${cycle.value.cycle_end}. `,
-					);
+			if (emailsEnabled) {
+				emit("ready");
+			} else {
+				let expiryDate = new Date(cycle.value.cycle_end).toUTCString();
+				setCookie("cycle", expiryDate);
+				console.log(
+					"checkForCycles()",
+					`Cannot send email, because monthly quota exceeded. ${cycle.value.cycle_remaining}/${cycle.value.cycle_max} left. Try again after ${expiryDate}. `,
+				);
+			}
 		})
 		.catch((err) => {
 			console.log(err);
@@ -213,7 +220,13 @@ const sendEmail = async () => {
 };
 
 onMounted(() => {
-	checkForCycles();
+	const cookie = getCookie("cycle");
+	if (cookie === null) {
+		checkForCycles();
+	} else {
+		cycle.value = { cycle_remaining: 0 };
+		console.log("onMounted()", `Cannot send email, because monthly quota exceeded. Try again after ${cookie}.`);
+	}
 });
 </script>
 
